@@ -1,0 +1,2735 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebBonus Product Showcase</title>
+    <style>
+      :root {
+        --bg: #060912;
+        --card: #101827cc;
+        --card2: #0d1424;
+        --line: rgba(255, 255, 255, 0.1);
+        --text: #f7f9ff;
+        --muted: #aeb8cc;
+        --gold: #f4c64f;
+        --gold2: #ffe49b;
+        --blue: #76ceff;
+        --green: #6ee7b7;
+        --red: #ff9b9b;
+        --purple: #c7b7ff;
+        --r: 28px;
+        --wrap: min(1240px, calc(100vw - 40px));
+        --shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Arial,
+          sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(
+            circle at 12% 4%,
+            rgba(244, 198, 79, 0.18),
+            transparent 28%
+          ),
+          radial-gradient(
+            circle at 84% 12%,
+            rgba(118, 206, 255, 0.12),
+            transparent 30%
+          ),
+          linear-gradient(180deg, #050812, #07101f 48%, #050812);
+        overflow-x: hidden;
+      }
+      body:before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+          linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px
+          );
+        background-size: 42px 42px;
+        mask-image: linear-gradient(#000, transparent 82%);
+      }
+      .progress {
+        position: fixed;
+        inset: 0 0 auto;
+        height: 3px;
+        background: rgba(255, 255, 255, 0.06);
+        z-index: 99;
+      }
+      .progress span {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, var(--gold), var(--blue));
+        box-shadow: 0 0 20px rgba(244, 198, 79, 0.45);
+      }
+      .shell {
+        position: relative;
+        z-index: 1;
+      }
+      .container {
+        width: var(--wrap);
+        margin: auto;
+      }
+      section {
+        padding: 78px 0;
+      }
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 90;
+        padding: 10px 0;
+        background: linear-gradient(
+          180deg,
+          rgba(5, 8, 18, 0.9),
+          rgba(5, 8, 18, 0.55)
+        );
+        backdrop-filter: blur(18px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .nav-inner {
+        width: min(1360px, calc(100vw - 28px));
+        margin: auto;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        justify-content: space-between;
+        padding: 10px 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(8, 13, 24, 0.76);
+        box-shadow: 0 14px 42px rgba(0, 0, 0, 0.22);
+      }
+      .brand {
+        display: flex;
+        gap: 11px;
+        align-items: center;
+        min-width: max-content;
+      }
+      .ix {
+        width: 42px;
+        height: 42px;
+        border-radius: 15px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, #fff1bc, #f4c64f 45%, #9e7108);
+        color: #121826;
+        font-weight: 1000;
+        letter-spacing: -0.04em;
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.22) inset,
+          0 14px 35px rgba(244, 198, 79, 0.28);
+        position: relative;
+        overflow: hidden;
+      }
+      .ix:after {
+        content: "";
+        position: absolute;
+        inset: -35% -60%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.6),
+          transparent
+        );
+        animation: shine 4.5s ease-in-out infinite;
+      }
+      .brand b {
+        display: block;
+      }
+      .brand span {
+        font-size: 0.68rem;
+        color: var(--muted);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+      .nav-links {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .nav a,
+      .lang {
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.035);
+        color: #c6d0e4;
+        text-decoration: none;
+        border-radius: 999px;
+        padding: 8px 10px;
+        font-size: 0.76rem;
+        font-weight: 850;
+        transition: 0.22s;
+      }
+      .nav a:hover,
+      .nav a.active,
+      .lang:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.09);
+        transform: translateY(-1px);
+      }
+      .lang {
+        color: #fff;
+        outline: 0;
+        cursor: pointer;
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: max-content;
+      }
+      .custom-lang {
+        position: relative;
+      }
+      .lang-trigger,
+      .theme-toggle {
+        height: 42px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.035));
+        color: #fff;
+        border-radius: 999px;
+        padding: 0 13px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.78rem;
+        font-weight: 950;
+        cursor: pointer;
+        transition: 0.24s ease;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+      }
+      .lang-trigger:hover,
+      .theme-toggle:hover {
+        transform: translateY(-1px);
+        border-color: rgba(244, 198, 79, 0.32);
+        background: rgba(244, 198, 79, 0.12);
+      }
+      .lang-globe,
+      #themeIcon {
+        display: grid;
+        place-items: center;
+        width: 22px;
+        height: 22px;
+        border-radius: 999px;
+        background: rgba(244, 198, 79, 0.14);
+      }
+      .chev {
+        font-size: 0.9rem;
+        color: var(--gold2);
+        transition: 0.22s ease;
+      }
+      .custom-lang.open .chev {
+        transform: rotate(180deg);
+      }
+      .lang-menu {
+        position: absolute;
+        top: calc(100% + 9px);
+        right: 0;
+        width: 210px;
+        padding: 8px;
+        border-radius: 20px;
+        background: rgba(10, 16, 30, 0.96);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+        backdrop-filter: blur(18px);
+        opacity: 0;
+        transform: translateY(-6px) scale(0.98);
+        pointer-events: none;
+        transition: 0.2s ease;
+        z-index: 120;
+      }
+      .custom-lang.open .lang-menu {
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+      }
+      .lang-menu button {
+        width: 100%;
+        border: 0;
+        outline: 0;
+        border-radius: 14px;
+        padding: 10px 11px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        background: transparent;
+        color: #dce6f7;
+        font-weight: 900;
+        cursor: pointer;
+        transition: 0.18s ease;
+        text-align: left;
+      }
+      .lang-menu button:hover {
+        background: rgba(255, 255, 255, 0.075);
+        color: #fff;
+      }
+      .lang-menu button.active {
+        background: linear-gradient(135deg, rgba(244, 198, 79, 0.22), rgba(118, 206, 255, 0.16));
+        color: #fff;
+        box-shadow: inset 0 0 0 1px rgba(244, 198, 79, 0.18);
+      }
+      .lang-menu small {
+        color: var(--gold2);
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+      }
+
+      body.theme-light {
+        --card: rgba(255, 255, 255, 0.84);
+        --card2: #ffffff;
+        --line: rgba(15, 23, 42, 0.12);
+        --text: #101827;
+        --muted: #5b6678;
+        --shadow: 0 24px 80px rgba(15, 23, 42, 0.13);
+        color: var(--text);
+        background:
+          radial-gradient(circle at 12% 4%, rgba(244, 198, 79, 0.24), transparent 28%),
+          radial-gradient(circle at 84% 12%, rgba(118, 206, 255, 0.18), transparent 30%),
+          linear-gradient(180deg, #f7f9ff, #edf4ff 48%, #fffaf0);
+      }
+      body.theme-light:before {
+        background-image:
+          linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+      }
+      body.theme-light .nav {
+        background: linear-gradient(180deg, rgba(248, 251, 255, 0.92), rgba(248, 251, 255, 0.72));
+        border-bottom-color: rgba(15, 23, 42, 0.08);
+      }
+      body.theme-light .nav-inner {
+        background: rgba(255, 255, 255, 0.78);
+        border-color: rgba(15, 23, 42, 0.12);
+        box-shadow: 0 18px 45px rgba(15, 23, 42, 0.1);
+      }
+      body.theme-light .brand span,
+      body.theme-light .lead,
+      body.theme-light .section-title p,
+      body.theme-light .li p,
+      body.theme-light .card p,
+      body.theme-light .point span,
+      body.theme-light .step p,
+      body.theme-light .frame-head p {
+        color: var(--muted);
+      }
+      body.theme-light .nav a,
+      body.theme-light .lang-trigger,
+      body.theme-light .theme-toggle {
+        color: #213049;
+        background: rgba(255, 255, 255, 0.76);
+        border-color: rgba(15, 23, 42, 0.12);
+      }
+      body.theme-light .nav a:hover,
+      body.theme-light .nav a.active,
+      body.theme-light .lang-trigger:hover,
+      body.theme-light .theme-toggle:hover {
+        color: #111827;
+        background: rgba(244, 198, 79, 0.16);
+      }
+      body.theme-light .point,
+      body.theme-light .card,
+      body.theme-light .panel,
+      body.theme-light .glass,
+      body.theme-light .node,
+      body.theme-light .step {
+        background: rgba(255, 255, 255, 0.82);
+        border-color: rgba(15, 23, 42, 0.1);
+        box-shadow: 0 18px 50px rgba(15, 23, 42, 0.09);
+      }
+      body.theme-light .li,
+      body.theme-light .closing-line {
+        background: rgba(255, 255, 255, 0.66);
+        border-color: rgba(15, 23, 42, 0.1);
+      }
+      body.theme-light .final {
+        background: linear-gradient(135deg, rgba(244, 198, 79, 0.2), rgba(255, 255, 255, 0.76), rgba(118, 206, 255, 0.17));
+        border-color: rgba(15, 23, 42, 0.12);
+      }
+      body.theme-light .lang-menu {
+        background: rgba(255, 255, 255, 0.96);
+        border-color: rgba(15, 23, 42, 0.12);
+        box-shadow: 0 24px 70px rgba(15, 23, 42, 0.18);
+      }
+      body.theme-light .lang-menu button {
+        color: #334155;
+      }
+      body.theme-light .lang-menu button:hover,
+      body.theme-light .lang-menu button.active {
+        color: #0f172a;
+      }
+      body.theme-light .team,
+      body.theme-light .gold {
+        color: #9a6b00;
+      }
+      .hero {
+        min-height: calc(100svh - 72px);
+        display: flex;
+        align-items: center;
+        padding-top: 38px;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 0.92fr 1.08fr;
+        gap: 30px;
+        align-items: center;
+      }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 13px;
+        border: 1px solid rgba(244, 198, 79, 0.22);
+        border-radius: 999px;
+        background: rgba(244, 198, 79, 0.12);
+        color: var(--gold2);
+        font-size: 0.76rem;
+        font-weight: 950;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+      h1 {
+        font-size: clamp(2.4rem, 5vw, 4.5rem);
+        line-height: 1.02;
+        letter-spacing: -0.055em;
+        margin: 16px 0;
+      }
+      .gold {
+        color: var(--gold2);
+      }
+      .lead {
+        color: #dce6f7;
+        font-size: 1.02rem;
+        line-height: 1.72;
+        max-width: 640px;
+      }
+      .hero-points {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 20px;
+      }
+      .point,
+      .card,
+      .panel,
+      .glass {
+        background: var(--card);
+        border: 1px solid var(--line);
+        box-shadow: 0 16px 46px rgba(0, 0, 0, 0.22);
+        backdrop-filter: blur(16px);
+      }
+      .point {
+        border-radius: 20px;
+        padding: 15px;
+        transition: 0.25s;
+      }
+      .point:hover,
+      .card:hover,
+      .mock:hover,
+      .step:hover,
+      .node:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow);
+      }
+      .point i {
+        font-style: normal;
+        width: 34px;
+        height: 34px;
+        border-radius: 13px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(
+          135deg,
+          rgba(244, 198, 79, 0.16),
+          rgba(118, 206, 255, 0.12)
+        );
+        margin-bottom: 9px;
+      }
+      .point b {
+        display: block;
+        font-size: 0.96rem;
+      }
+      .point span {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.55;
+      }
+      .mock-stack {
+        display: grid;
+        gap: 14px;
+        transform: perspective(1200px) rotateY(-3deg);
+      }
+      .mock {
+        border-radius: 28px;
+        padding: 14px;
+        background: linear-gradient(180deg, #f8fbff, #edf5ff);
+        color: #0f172a;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.26);
+        transition: 0.25s;
+      }
+      .mock-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .dots {
+        display: flex;
+        gap: 7px;
+      }
+      .dots span {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #ff8686;
+      }
+      .dots span:nth-child(2) {
+        background: #f4c64f;
+      }
+      .dots span:nth-child(3) {
+        background: #44d69a;
+      }
+      .mock-title {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .mock-title b {
+        font-size: 0.95rem;
+      }
+      .mock-title small {
+        display: block;
+        color: #64748b;
+      }
+      .chip {
+        display: inline-flex;
+        padding: 7px 10px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #f4c64f, #76ceff);
+        color: #111827;
+        font-weight: 950;
+        font-size: 0.7rem;
+      }
+      .screen {
+        display: grid;
+        grid-template-columns: 170px 1fr;
+        gap: 11px;
+      }
+      .side,
+      .content {
+        border-radius: 18px;
+        padding: 11px;
+        background: #f8fafc;
+        border: 1px solid #dbe3ee;
+      }
+      .side {
+        display: grid;
+        gap: 7px;
+        align-content: start;
+      }
+      .side .menu {
+        padding: 8px 9px;
+        border-radius: 12px;
+        color: #475569;
+        font-size: 0.76rem;
+        font-weight: 850;
+      }
+      .side .menu.active {
+        background: linear-gradient(135deg, #161f32, #32435f);
+        color: #fff;
+      }
+      .content {
+        display: grid;
+        gap: 9px;
+      }
+      .fields {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+      .field,
+      .mini-card {
+        background: #fff;
+        border: 1px solid #dbe3ee;
+        border-radius: 13px;
+        padding: 9px;
+      }
+      .field small {
+        display: block;
+        color: #64748b;
+        text-transform: uppercase;
+        font-size: 0.62rem;
+        font-weight: 950;
+        letter-spacing: 0.07em;
+      }
+      .field b {
+        font-size: 0.78rem;
+      }
+      .wide {
+        grid-column: 1/-1;
+      }
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+      }
+      .metric strong {
+        display: block;
+        font-size: 1.05rem;
+      }
+      .metric span,
+      .mini-card p {
+        color: #64748b;
+        font-size: 0.72rem;
+        line-height: 1.45;
+        margin: 3px 0 0;
+      }
+      .section-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 20px;
+        margin-bottom: 24px;
+      }
+      .section-title h2 {
+        margin: 10px 0 0;
+        font-size: clamp(1.9rem, 3.4vw, 3rem);
+        letter-spacing: -0.04em;
+      }
+      .section-title p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+        max-width: 560px;
+      }
+      .grid2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      .grid3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .card {
+        border-radius: var(--r);
+        padding: 22px;
+        transition: 0.25s;
+      }
+      .card h3 {
+        margin: 0 0 14px;
+        font-size: 1.35rem;
+      }
+      .list {
+        display: grid;
+        gap: 11px;
+      }
+      .li {
+        display: grid;
+        grid-template-columns: 38px 1fr;
+        gap: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 18px;
+        padding: 13px;
+      }
+      .li i {
+        font-style: normal;
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        border-radius: 14px;
+        background: rgba(244, 198, 79, 0.12);
+        color: var(--gold2);
+        font-weight: 950;
+      }
+      .li b {
+        font-size: 0.94rem;
+      }
+      .li p,
+      .card p {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.6;
+      }
+      .tag {
+        display: inline-flex;
+        padding: 7px 10px;
+        border-radius: 999px;
+        background: rgba(244, 198, 79, 0.12);
+        color: var(--gold2);
+        font-size: 0.72rem;
+        font-weight: 950;
+        margin-bottom: 10px;
+      }
+      .demo-grid {
+        display: grid;
+        grid-template-columns: 0.66fr 1.34fr;
+        gap: 18px;
+      }
+      .steps {
+        display: grid;
+        grid-template-rows: repeat(5, 1fr);
+        gap: 9px;
+      }
+      .step {
+        border-radius: 18px;
+        padding: 13px;
+        background: rgba(255, 255, 255, 0.045);
+        border: 1px solid var(--line);
+        cursor: pointer;
+        transition: 0.25s;
+      }
+      .step.active {
+        border-color: rgba(244, 198, 79, 0.36);
+        background: linear-gradient(
+          135deg,
+          rgba(244, 198, 79, 0.14),
+          rgba(255, 255, 255, 0.04)
+        );
+      }
+      .step-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .no {
+        width: 30px;
+        height: 30px;
+        display: grid;
+        place-items: center;
+        border-radius: 11px;
+        background: rgba(244, 198, 79, 0.14);
+        color: var(--gold2);
+        font-weight: 950;
+      }
+      .step h4 {
+        margin: 8px 0 4px;
+      }
+      .step p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.82rem;
+        line-height: 1.46;
+      }
+      .demo-panel {
+        border-radius: 28px;
+        padding: 16px;
+      }
+      .demo-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+        gap: 10px;
+      }
+      .controls {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .btn,
+      .counter {
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        background: rgba(255, 255, 255, 0.05);
+        color: #fff;
+        border-radius: 14px;
+        padding: 9px 12px;
+        font-weight: 900;
+      }
+      .btn {
+        cursor: pointer;
+      }
+      .demo-screen {
+        position: relative;
+        min-height: 500px;
+        border-radius: 24px;
+        padding: 16px;
+        overflow: hidden;
+        background: linear-gradient(180deg, #f8fbff, #eef6ff);
+        color: #0f172a;
+      }
+      .frame {
+        position: absolute;
+        inset: 16px;
+        opacity: 0;
+        transform: translateY(12px) scale(0.99);
+        transition: 0.42s;
+      }
+      .frame.active {
+        opacity: 1;
+        transform: none;
+      }
+      .frame-ui {
+        height: 100%;
+        display: grid;
+        gap: 12px;
+        align-content: start;
+      }
+      .frame-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .frame-head p {
+        margin: 4px 0 0;
+        color: #64748b;
+      }
+      .frame-layout {
+        display: grid;
+        grid-template-columns: 165px 1fr;
+        gap: 12px;
+      }
+      .history {
+        display: grid;
+        gap: 10px;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 1.15fr 0.8fr 0.8fr;
+        gap: 9px;
+        align-items: center;
+        background: #fff;
+        border: 1px solid #dbe3ee;
+        border-radius: 14px;
+        padding: 10px;
+      }
+      .badge {
+        border-radius: 999px;
+        padding: 6px 8px;
+        font-size: 0.68rem;
+        font-weight: 950;
+        text-align: center;
+      }
+      .pending {
+        background: #fff5d6;
+        color: #9a6b00;
+      }
+      .process {
+        background: #e3f4ff;
+        color: #0474a6;
+      }
+      .approved {
+        background: #dcfce7;
+        color: #087a45;
+      }
+      .rejected {
+        background: #ffe2e2;
+        color: #b42323;
+      }
+      .chat {
+        max-width: 86%;
+        padding: 11px 13px;
+        border-radius: 16px;
+        background: #fff;
+        border: 1px solid #dbe3ee;
+        font-size: 0.8rem;
+        line-height: 1.55;
+      }
+      .chat.admin {
+        margin-left: auto;
+        background: linear-gradient(135deg, #e9f6ff, #fff3cd);
+      }
+      .workflow {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 14px;
+      }
+      .node {
+        position: relative;
+        border-radius: 24px;
+        padding: 20px;
+        min-height: 210px;
+        transition: 0.25s;
+      }
+      .node:after {
+        content: "";
+        position: absolute;
+        right: -13px;
+        top: 50%;
+        width: 26px;
+        height: 2px;
+        background: linear-gradient(90deg, var(--gold), var(--blue));
+        animation: pulse 2.8s infinite;
+      }
+      .node:last-child:after {
+        display: none;
+      }
+      .node .num {
+        width: 42px;
+        height: 42px;
+        border-radius: 15px;
+        display: grid;
+        place-items: center;
+        background: rgba(244, 198, 79, 0.14);
+        color: var(--gold2);
+        font-weight: 1000;
+      }
+      .flow {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        position: relative;
+      }
+      .flow:before {
+        content: "";
+        position: absolute;
+        left: 18%;
+        right: 18%;
+        top: 50%;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          rgba(244, 198, 79, 0.45),
+          rgba(118, 206, 255, 0.45)
+        );
+      }
+      .flow:after {
+        content: "";
+        position: absolute;
+        top: 16%;
+        bottom: 16%;
+        left: 50%;
+        width: 2px;
+        background: linear-gradient(
+          rgba(244, 198, 79, 0.35),
+          rgba(118, 206, 255, 0.35)
+        );
+      }
+      .flow .card {
+        position: relative;
+        z-index: 1;
+      }
+      .final {
+        border-radius: 34px;
+        padding: 34px;
+        background: linear-gradient(
+          135deg,
+          rgba(244, 198, 79, 0.15),
+          rgba(255, 255, 255, 0.05),
+          rgba(118, 206, 255, 0.11)
+        );
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        text-align: left;
+      }
+      .closing-grid {
+        display: grid;
+        grid-template-columns: 1.08fr 0.92fr;
+        gap: 22px;
+        align-items: start;
+      }
+      .closing-line {
+        display: grid;
+        grid-template-columns: 86px 1fr;
+        gap: 12px;
+        padding: 12px 14px;
+        border-radius: 17px;
+        background: rgba(255, 255, 255, 0.055);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        margin-top: 10px;
+      }
+      .signoff {
+        display: grid;
+        justify-items: center;
+        gap: 12px;
+        margin-top: 30px;
+        padding-top: 26px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .big-logo {
+        width: 94px;
+        height: 94px;
+        border-radius: 30px;
+        font-size: 2rem;
+      }
+      .thanks {
+        font-size: 1.7rem;
+        font-weight: 1000;
+        letter-spacing: 0.04em;
+      }
+      .team {
+        letter-spacing: 0.18em;
+        font-weight: 950;
+        color: var(--gold2);
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(22px);
+        transition:
+          opacity 0.7s,
+          transform 0.7s;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: none;
+      }
+      .float {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      /* Light mode V3: soft executive light, not pure white */
+      body.theme-light {
+        --card: rgba(246, 248, 252, 0.88);
+        --card2: #f3f6fb;
+        --line: rgba(20, 31, 52, 0.13);
+        --text: #111827;
+        --muted: #4f5f76;
+        --gold2: #9a6b00;
+        --blue: #0369a1;
+        --green: #047857;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 12% 4%, rgba(244, 198, 79, 0.22), transparent 28%),
+          radial-gradient(circle at 84% 12%, rgba(118, 206, 255, 0.16), transparent 30%),
+          linear-gradient(180deg, #e8edf6 0%, #f3f0e6 52%, #e9eef7 100%);
+      }
+      body.theme-light .nav {
+        background: linear-gradient(180deg, rgba(232, 237, 246, 0.94), rgba(232, 237, 246, 0.72));
+      }
+      body.theme-light .nav-inner,
+      body.theme-light .point,
+      body.theme-light .card,
+      body.theme-light .panel,
+      body.theme-light .glass,
+      body.theme-light .node,
+      body.theme-light .step {
+        background: rgba(245, 248, 252, 0.86);
+        color: #111827;
+      }
+      body.theme-light .mock,
+      body.theme-light .demo-screen {
+        background: linear-gradient(180deg, #eef3f9, #e7edf6);
+        color: #111827;
+      }
+      body.theme-light .side,
+      body.theme-light .content,
+      body.theme-light .field,
+      body.theme-light .mini-card,
+      body.theme-light .row,
+      body.theme-light .chat {
+        background: #f7f9fc;
+        color: #111827;
+        border-color: rgba(20, 31, 52, 0.12);
+      }
+      body.theme-light .section-title h2,
+      body.theme-light h1,
+      body.theme-light h2,
+      body.theme-light h3,
+      body.theme-light h4,
+      body.theme-light .card b,
+      body.theme-light .li b,
+      body.theme-light .point b,
+      body.theme-light .field b,
+      body.theme-light .mini-card b,
+      body.theme-light .closing-line b,
+      body.theme-light .thanks {
+        color: #111827;
+      }
+      body.theme-light .eyebrow,
+      body.theme-light .tag {
+        background: rgba(154, 107, 0, 0.12);
+        color: #7a5200;
+        border-color: rgba(154, 107, 0, 0.22);
+      }
+      body.theme-light .lead,
+      body.theme-light .section-title p,
+      body.theme-light .li p,
+      body.theme-light .card p,
+      body.theme-light .point span,
+      body.theme-light .step p,
+      body.theme-light .frame-head p,
+      body.theme-light .metric span,
+      body.theme-light .mini-card p,
+      body.theme-light .field small,
+      body.theme-light .brand span {
+        color: #4f5f76;
+      }
+      body.theme-light .final {
+        background: linear-gradient(135deg, rgba(244, 198, 79, 0.18), rgba(245, 248, 252, 0.86), rgba(118, 206, 255, 0.15));
+        color: #111827;
+      }
+      body.theme-light .closing-line {
+        background: rgba(245, 248, 252, 0.72);
+        color: #111827;
+      }
+      body.theme-light .lang-menu {
+        background: rgba(245, 248, 252, 0.98);
+      }
+      body.theme-light .lang-menu button.active {
+        background: linear-gradient(135deg, rgba(244, 198, 79, 0.22), rgba(118, 206, 255, 0.18));
+      }
+      body.theme-light .chat.user {
+        background: #f7f9fc;
+        color: #111827;
+      }
+      body.theme-light .chat.admin {
+        background: linear-gradient(135deg, #e8f4ff, #fff1c9);
+        color: #111827;
+      }
+
+
+      /* V4 polish: demo controls visibility + cleaner segmented toolbar */
+      .demo-panel {
+        overflow: hidden;
+      }
+      .demo-top {
+        position: relative;
+        padding: 10px 10px 10px 12px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.045);
+        border: 1px solid rgba(255, 255, 255, 0.075);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      }
+      .controls {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: nowrap;
+        padding: 6px;
+        border-radius: 18px;
+        background: rgba(8, 13, 24, 0.58);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+        backdrop-filter: blur(14px);
+      }
+      .btn,
+      .counter {
+        min-height: 38px;
+        border-radius: 13px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.07);
+        color: #f8fbff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        padding: 8px 12px;
+        line-height: 1;
+        font-weight: 950;
+        white-space: nowrap;
+        text-shadow: none;
+      }
+      .btn {
+        min-width: 40px;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+        border-color: rgba(244, 198, 79, 0.32);
+        background: rgba(244, 198, 79, 0.14);
+      }
+      .counter input {
+        accent-color: var(--gold);
+        width: 14px;
+        height: 14px;
+        margin: 0;
+      }
+      #counter {
+        min-width: 62px;
+        letter-spacing: 0.02em;
+        background: linear-gradient(135deg, rgba(244, 198, 79, 0.18), rgba(118, 206, 255, 0.12));
+      }
+      body.theme-light .demo-top {
+        background: rgba(231, 237, 247, 0.82);
+        border-color: rgba(20, 31, 52, 0.1);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+      }
+      body.theme-light .controls {
+        background: rgba(224, 231, 241, 0.86);
+        border-color: rgba(20, 31, 52, 0.12);
+        box-shadow: 0 16px 36px rgba(20, 31, 52, 0.08);
+      }
+      body.theme-light .btn,
+      body.theme-light .counter {
+        background: rgba(255, 255, 255, 0.88);
+        border-color: rgba(20, 31, 52, 0.12);
+        color: #172033;
+        box-shadow: 0 8px 18px rgba(20, 31, 52, 0.06);
+      }
+      body.theme-light #counter {
+        color: #172033;
+        background: linear-gradient(135deg, rgba(244, 198, 79, 0.28), rgba(118, 206, 255, 0.2));
+      }
+      body.theme-light .btn:hover,
+      body.theme-light .counter:hover {
+        border-color: rgba(154, 107, 0, 0.24);
+        background: rgba(255, 248, 226, 0.96);
+      }
+      @media (max-width: 760px) {
+        .demo-top {
+          align-items: flex-start;
+        }
+        .controls {
+          width: 100%;
+          justify-content: space-between;
+          overflow-x: auto;
+        }
+        .btn,
+        .counter {
+          min-height: 36px;
+          padding: 8px 10px;
+          font-size: 0.78rem;
+        }
+      }
+
+
+      /* V7 contrast fix: inner metric/field cards must stay readable in both dark and light mode */
+      .field,
+      .mini-card,
+      .row,
+      .chat {
+        color: #111827;
+      }
+      .field b,
+      .field strong,
+      .mini-card b,
+      .row b,
+      .chat b {
+        color: #111827;
+      }
+      .field small,
+      .metric span,
+      .mini-card p,
+      .row span {
+        color: #526178;
+      }
+      .metric strong {
+        color: #111827;
+        font-weight: 1000;
+      }
+      .metrics .field {
+        background: linear-gradient(180deg, #ffffff, #f3f7fc);
+        border-color: rgba(148, 163, 184, 0.35);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+      }
+      .metrics .field:nth-child(1) strong { color: #087a45; }
+      .metrics .field:nth-child(2) strong { color: #b42323; }
+      .metrics .field:nth-child(3) strong { color: #0474a6; }
+      .metrics .field:nth-child(4) strong { color: #7a5200; }
+
+      body.theme-light .metrics .field {
+        background: linear-gradient(180deg, #f9fbff, #eef3f9);
+        border-color: rgba(20, 31, 52, 0.12);
+        box-shadow: 0 12px 28px rgba(20, 31, 52, 0.06);
+      }
+      body.theme-light .field,
+      body.theme-light .mini-card,
+      body.theme-light .row,
+      body.theme-light .chat {
+        color: #111827;
+      }
+      body.theme-light .field b,
+      body.theme-light .field strong,
+      body.theme-light .mini-card b,
+      body.theme-light .row b,
+      body.theme-light .chat b {
+        color: #111827;
+      }
+      body.theme-light .field small,
+      body.theme-light .metric span,
+      body.theme-light .mini-card p,
+      body.theme-light .row span {
+        color: #4f5f76;
+      }
+
+      @keyframes shine {
+        0%,
+        100% {
+          transform: translateX(-150%) rotate(10deg);
+        }
+        55% {
+          transform: translateX(150%) rotate(10deg);
+        }
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.25;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+      @media (max-width: 1180px) {
+        .hero-grid,
+        .demo-grid,
+        .closing-grid {
+          grid-template-columns: 1fr;
+        }
+        .mock-stack {
+          transform: none;
+        }
+        .workflow {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .node:after {
+          display: none;
+        }
+        .nav-inner {
+          border-radius: 24px;
+          align-items: flex-start;
+        }
+        .nav-links {
+          justify-content: flex-start;
+        }
+        .screen,
+        .frame-layout {
+          grid-template-columns: 1fr;
+        }
+        .demo-screen {
+          min-height: 650px;
+        }
+      }
+      @media (max-width: 760px) {
+        :root {
+          --wrap: min(100vw - 24px, 680px);
+        }
+        section {
+          padding: 58px 0;
+        }
+        .nav-inner {
+          flex-direction: column;
+        }
+        .hero-points,
+        .grid2,
+        .grid3,
+        .fields,
+        .metrics,
+        .workflow,
+        .flow {
+          grid-template-columns: 1fr;
+        }
+        .flow:before,
+        .flow:after {
+          display: none;
+        }
+        .section-title {
+          display: block;
+        }
+        .row {
+          grid-template-columns: 1fr;
+        }
+        .demo-screen {
+          min-height: 790px;
+        }
+        .closing-line {
+          grid-template-columns: 1fr;
+        }
+        .nav a {
+          font-size: 0.72rem;
+          padding: 7px 9px;
+        }
+        .nav-actions {
+          width: 100%;
+          justify-content: space-between;
+        }
+        .custom-lang {
+          flex: 1;
+        }
+        .lang-trigger,
+        .theme-toggle {
+          height: 40px;
+        }
+        .lang-trigger {
+          width: 100%;
+          justify-content: center;
+        }
+        .lang-menu {
+          left: 0;
+          right: auto;
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="progress"><span id="bar"></span></div>
+    <div class="shell">
+      <header class="nav">
+        <div class="nav-inner">
+          <div class="brand">
+            <div class="ix">IX</div>
+            <div>
+              <b data-i18n="brandName">WebBonus</b><span data-i18n="brandSub">Product Showcase</span>
+            </div>
+          </div>
+          <nav class="nav-links" id="nav">
+            <a href="#intro" data-i18n="navIntro">Intro</a
+            ><a href="#overview" data-i18n="navOverview">Overview</a
+            ><a href="#user" data-i18n="navUser">POV User</a
+            ><a href="#demo" data-i18n="navDemo">Demo Flow</a
+            ><a href="#admin" data-i18n="navAdmin">POV Admin</a
+            ><a href="#workflow" data-i18n="navWorkflow">Workflow</a
+            ><a href="#actions" data-i18n="navActions">Actions</a
+            ><a href="#value" data-i18n="navValue">Core Value</a
+            ><a href="#closing" data-i18n="navClosing">Closing</a>
+          </nav>
+          <div class="nav-actions">
+            <div class="custom-lang" id="langPicker">
+              <button class="lang-trigger" id="langTrigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+                <span class="lang-globe">🌐</span>
+                <span id="langLabel">Bahasa Indonesia</span>
+                <span class="chev">⌄</span>
+              </button>
+              <div class="lang-menu" role="listbox" aria-label="Language">
+                <button type="button" data-lang-option="id" class="active"><span>Bahasa Indonesia</span><small>ID</small></button>
+                <button type="button" data-lang-option="zh"><span>繁體中文</span><small>ZH</small></button>
+              </div>
+            </div>
+            <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">
+              <span id="themeIcon">☾</span>
+              <span id="themeLabel">Dark</span>
+            </button>
+          </div>
+        </div>
+      </header>
+      <main>
+        <section class="hero" id="intro">
+          <div class="container hero-grid">
+            <div class="reveal">
+              <span class="eyebrow" data-i18n="heroEyebrow"
+                >Internal Project Presentation</span
+              >
+              <h1>
+                <span data-i18n="heroTitle1">WebBonus menghubungkan</span
+                ><br /><span class="gold" data-i18n="heroTitle2"
+                  >user, admin, dan proses HQ</span
+                >
+              </h1>
+              <p class="lead" data-i18n="heroLead">
+                WebBonus adalah panel digital yang menghubungkan user, admin,
+                dan proses HQ dalam satu alur kerja.
+              </p>
+              <div class="hero-points">
+                <div class="point">
+                  <i>🧾</i><b data-i18n="hp1t">Claim lebih terarah</b
+                  ><span data-i18n="hp1d"
+                    >Form bonus, bukti, remarks, dan history berada dalam satu
+                    panel.</span
+                  >
+                </div>
+                <div class="point">
+                  <i>📡</i><b data-i18n="hp2t">Status lebih jelas</b
+                  ><span data-i18n="hp2d"
+                    >Pending, on process, approved, rejected, sampai hasil HQ
+                    lebih mudah dilihat.</span
+                  >
+                </div>
+                <div class="point">
+                  <i>🛡️</i><b data-i18n="hp3t">Admin lebih terkontrol</b
+                  ><span data-i18n="hp3d"
+                    >Review, remarks, comment, processed by, dan submit HQ ada
+                    di admin panel.</span
+                  >
+                </div>
+                <div class="point">
+                  <i>📊</i><b data-i18n="hp4t">Siap dipantau</b
+                  ><span data-i18n="hp4d"
+                    >Dashboard membantu merangkum claim, approved, rejected, dan
+                    nilai approval.</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="mock-stack reveal float">
+              <article class="mock">
+                <div class="mock-head">
+                  <div class="mock-title">
+                    <div class="dots">
+                      <span></span><span></span><span></span>
+                    </div>
+                    <div>
+                      <b data-i18n="userPreview">User Panel Preview</b
+                      ><small data-i18n="userPreviewSub"
+                        >Claim Bonus aktif — bukan Home</small
+                      >
+                    </div>
+                  </div>
+                  <span class="chip" data-i18n="claimBonus">Claim Bonus</span>
+                </div>
+                <div class="screen">
+                  <aside class="side">
+                    <b data-i18n="userPortal">User Portal</b>
+                    <div class="menu" data-i18n="mHome">Home</div>
+                    <div class="menu active" data-i18n="mClaim">
+                      Claim Bonus
+                    </div>
+                    <div class="menu" data-i18n="mHistory">Claim History</div>
+                    <div class="menu" data-i18n="mLanguage">Language</div>
+                    <div class="menu" data-i18n="mView">View Mode</div>
+                  </aside>
+                  <div class="content">
+                    <b data-i18n="claimPanel">CLAIM BONUS PANEL</b>
+                    <div class="fields">
+                      <div class="field">
+                        <small data-i18n="fForm">Form</small
+                        ><b data-i18n="claimBonus">Claim Bonus</b>
+                      </div>
+                      <div class="field">
+                        <small data-i18n="fMember">Akun Member</small
+                        ><b>SOYA21</b>
+                      </div>
+                      <div class="field">
+                        <small data-i18n="fAgent">Kode Agen</small><b>DW32</b>
+                      </div>
+                      <div class="field wide">
+                        <small data-i18n="fType">Tipe Bonus</small
+                        ><b>體驗金-完善資料 / Bonus percobaan 28</b>
+                      </div>
+                      <div class="field wide">
+                        <small data-i18n="fRemarks">Remarks</small
+                        ><b>claim 28 dulu TQ</b>
+                      </div>
+                    </div>
+                    <div class="grid2">
+                      <div class="mini-card">
+                        <b data-i18n="detailBonus">Detail bonus terarah</b>
+                        <p data-i18n="detailBonusD">
+                          Field mengikuti kategori bonus yang dipilih.
+                        </p>
+                      </div>
+                      <div class="mini-card">
+                        <b data-i18n="comments">Catatan & comment</b>
+                        <p data-i18n="commentsD">
+                          User dapat menerima balasan admin langsung dari panel.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="mock">
+                <div class="mock-head">
+                  <div class="mock-title">
+                    <div class="dots">
+                      <span></span><span></span><span></span>
+                    </div>
+                    <div>
+                      <b data-i18n="adminPreview">Admin Panel Preview</b
+                      ><small data-i18n="adminPreviewSub"
+                        >Dashboard & Claim Management sesuai panel admin</small
+                      >
+                    </div>
+                  </div>
+                  <span class="chip" data-i18n="dashboard">Dashboard</span>
+                </div>
+                <div class="screen">
+                  <aside class="side">
+                    <b data-i18n="adminPanel">Admin Panel</b>
+                    <div class="menu active" data-i18n="dashboard">
+                      Dashboard
+                    </div>
+                    <div class="menu" data-i18n="claimMgmt">
+                      Claim Management
+                    </div>
+                    <div class="menu" data-i18n="submitHq">Submit HQ</div>
+                    <div class="menu" data-i18n="ownerControl">
+                      Owner Control
+                    </div>
+                  </aside>
+                  <div class="content">
+                    <b data-i18n="reportTitle">Ringkasan Report Operasional</b>
+                    <div class="metrics">
+                      <div class="field metric">
+                        <small data-i18n="totalClaim">Total Claim</small
+                        ><strong>128</strong>
+                      </div>
+                      <div class="field metric">
+                        <small data-i18n="approved">Approved</small
+                        ><strong>86</strong>
+                      </div>
+                      <div class="field metric">
+                        <small data-i18n="process">On Process</small
+                        ><strong>29</strong>
+                      </div>
+                      <div class="field metric">
+                        <small data-i18n="rejected">Rejected</small
+                        ><strong>13</strong>
+                      </div>
+                    </div>
+                    <div class="grid3">
+                      <div class="mini-card">
+                        <b>ST I8</b>
+                        <p data-i18n="adminSample">Admin aktif</p>
+                      </div>
+                      <div class="mini-card">
+                        <b>ST I5</b>
+                        <p data-i18n="adminSample">Admin aktif</p>
+                      </div>
+                      <div class="mini-card">
+                        <b>ST I7</b>
+                        <p data-i18n="adminSample">Admin aktif</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+        <section id="overview">
+          <div class="container">
+            <div class="section-title reveal">
+              <div>
+                <span class="eyebrow" data-i18n="overviewNav">Overview</span>
+                <h2 data-i18n="overviewTitle">Keunggulan WEBBONUS</h2>
+              </div>
+              <p data-i18n="overviewDesc">
+                WebBonus bukan hanya memindahkan form ke panel, tetapi membuat
+                submit, status, dan kontrol admin menjadi lebih mudah dipahami.
+              </p>
+            </div>
+            <div class="grid2">
+              <div class="card reveal">
+                <h3 data-i18n="ovMain">Fokus utama project</h3>
+                <div class="grid2">
+                  <div class="li">
+                    <i>01</i>
+                    <div>
+                      <b data-i18n="ov1t">Input terarah</b>
+                      <p data-i18n="ov1d">
+                        Field mengikuti jenis bonus agar user tidak bingung.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="li">
+                    <i>02</i>
+                    <div>
+                      <b data-i18n="ov2t">History jelas</b>
+                      <p data-i18n="ov2d">
+                        User bisa melihat claim sebelumnya dari satu halaman.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="li">
+                    <i>03</i>
+                    <div>
+                      <b data-i18n="ov3t">Comment & remarks</b>
+                      <p data-i18n="ov3d">
+                        Catatan follow-up tidak tercecer di luar sistem.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="li">
+                    <i>04</i>
+                    <div>
+                      <b data-i18n="ov4t">Admin control</b>
+                      <p data-i18n="ov4d">
+                        Review, processed by, approve/reject, dan submit HQ
+                        lebih terpantau.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card reveal">
+                <span class="tag" data-i18n="dashboard">Dashboard</span>
+                <h3 data-i18n="ovReportT">Siap menjadi dasar report</h3>
+                <p data-i18n="ovReportD">
+                  Dashboard admin membantu melihat total claim, status proses,
+                  dan nilai approved untuk monitoring harian.
+                </p>
+                <div class="metrics" style="margin-top: 16px">
+                  <div class="field metric">
+                    <small data-i18n="approved">Approved</small
+                    ><strong>86</strong>
+                  </div>
+                  <div class="field metric">
+                    <small data-i18n="rejected">Rejected</small
+                    ><strong>13</strong>
+                  </div>
+                  <div class="field metric">
+                    <small data-i18n="process">On Process</small
+                    ><strong>29</strong>
+                  </div>
+                  <div class="field metric">
+                    <small data-i18n="approvedValue">Nilai Approved</small
+                    ><strong>28K</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="user">
+          <div class="container">
+            <div class="section-title reveal">
+              <div>
+                <span class="eyebrow" data-i18n="userEyebrow">POV User</span>
+                <h2 data-i18n="userTitle">
+                  User panel lebih mudah dipakai dan status lebih transparan
+                </h2>
+              </div>
+              <p data-i18n="userDesc">
+                Nilai utama untuk user: pengisian lebih sederhana, history lebih
+                jelas, dan status claim lebih mudah diikuti.
+              </p>
+            </div>
+            <div class="grid2">
+              <div class="card reveal">
+                <h3 data-i18n="before">Sebelum WebBonus</h3>
+                <div class="list">
+                  <div class="li">
+                    <i>✕</i>
+                    <div>
+                      <b data-i18n="ub1t">Manual lebih rumit</b>
+                      <p data-i18n="ub1d">
+                        User harus mengisi form manual dan sering bingung bagian
+                        mana yang wajib.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="li">
+                    <i>✕</i>
+                    <div>
+                      <b data-i18n="ub2t">History tidak jelas</b>
+                      <p data-i18n="ub2d">
+                        Tidak ada satu halaman yang rapi untuk melihat claim
+                        sebelumnya.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="li">
+                    <i>✕</i>
+                    <div>
+                      <b data-i18n="ub3t">Status tidak transparan</b>
+                      <p data-i18n="ub3d">
+                        User sulit memastikan claim sedang diproses atau sudah
+                        selesai.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card reveal">
+                <h3 data-i18n="after">Sesudah WebBonus</h3>
+                <div class="list">
+                  <div class="li">
+                    <i>✓</i>
+                    <div>
+                      <b data-i18n="ua1t">Panel lebih mudah</b>
+                      <p data-i18n="ua1d">
+                        Tipe bonus, detail, bukti, dan remarks diarahkan dari
+                        panel.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="li">
+                    <i>✓</i>
+                    <div>
+                      <b data-i18n="ua2t">Claim History jelas</b>
+                      <p data-i18n="ua2d">
+                        User dapat melihat claim dan hasil action dari satu
+                        tempat.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="li">
+                    <i>✓</i>
+                    <div>
+                      <b data-i18n="ua3t">Ada comment user ↔ admin</b>
+                      <p data-i18n="ua3d">
+                        Revisi dan tindak lanjut bisa terbaca langsung di panel.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="grid3" style="margin-top: 16px">
+              <div class="card reveal">
+                <span class="tag" data-i18n="easy">Mudah</span
+                ><b data-i18n="ui1t">Waktu cek status berkurang</b>
+                <p data-i18n="ui1d">
+                  User tidak perlu membuka file lain hanya untuk memastikan nota
+                  diproses.
+                </p>
+              </div>
+              <div class="card reveal">
+                <span class="tag" data-i18n="tidy">Rapi</span
+                ><b data-i18n="ui2t">Setiap claim punya jejak</b>
+                <p data-i18n="ui2d">
+                  Data claim, remarks, dan action tersimpan dalam satu alur.
+                </p>
+              </div>
+              <div class="card reveal">
+                <span class="tag" data-i18n="transparent">Transparan</span
+                ><b data-i18n="ui3t">Status lebih mudah dipahami</b>
+                <p data-i18n="ui3d">
+                  Pending, on process, approved, rejected, dan HQ status tampil
+                  lebih jelas.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="demo">
+          <div class="container">
+            <div class="section-title reveal">
+              <div>
+                <span class="eyebrow" data-i18n="demoEyebrow"
+                  >Live Product Flow</span
+                >
+                <h2 data-i18n="demoTitle">
+                  Demo flow 1–5 menjelaskan cara kerja WebBonus
+                </h2>
+              </div>
+              <p data-i18n="demoDesc">
+                Flow mengikuti logic project: user membuka Claim Bonus, mengisi
+                detail, melihat history, admin memproses, lalu status kembali ke
+                user.
+              </p>
+            </div>
+            <div class="demo-grid">
+              <div class="steps reveal" id="steps">
+                <div class="step active" data-step="0">
+                  <div class="step-top">
+                    <span class="no">1</span><span class="chip">User</span>
+                  </div>
+                  <h4 data-i18n="ds1t">Buka Claim Bonus</h4>
+                  <p data-i18n="ds1d">Sidebar diarahkan ke Claim Bonus.</p>
+                </div>
+                <div class="step" data-step="1">
+                  <div class="step-top">
+                    <span class="no">2</span><span class="chip">Form</span>
+                  </div>
+                  <h4 data-i18n="ds2t">Isi detail bonus</h4>
+                  <p data-i18n="ds2d">
+                    Member, kode agen, tipe bonus, dan remarks terisi jelas.
+                  </p>
+                </div>
+                <div class="step" data-step="2">
+                  <div class="step-top">
+                    <span class="no">3</span><span class="chip">History</span>
+                  </div>
+                  <h4 data-i18n="ds3t">Lihat Claim History</h4>
+                  <p data-i18n="ds3d">
+                    Claim muncul dengan status dan hasil action.
+                  </p>
+                </div>
+                <div class="step" data-step="3">
+                  <div class="step-top">
+                    <span class="no">4</span><span class="chip">Admin</span>
+                  </div>
+                  <h4 data-i18n="ds4t">Admin verifikasi</h4>
+                  <p data-i18n="ds4d">
+                    Admin review, memberi remarks, processed by, dan submit HQ.
+                  </p>
+                </div>
+                <div class="step" data-step="4">
+                  <div class="step-top">
+                    <span class="no">5</span><span class="chip">Result</span>
+                  </div>
+                  <h4 data-i18n="ds5t">Status kembali ke user</h4>
+                  <p data-i18n="ds5d">
+                    Hasil proses tampil kembali pada Claim History.
+                  </p>
+                </div>
+              </div>
+              <div class="demo-panel glass reveal">
+                <div class="demo-top">
+                  <span class="eyebrow" data-i18n="productPreview"
+                    >Product Preview</span
+                  >
+                  <div class="controls">
+                    <span class="counter" id="counter">1 / 5</span
+                    ><button class="btn" id="prev">←</button
+                    ><button class="btn" id="next">→</button
+                    ><label class="counter"
+                      ><input type="checkbox" id="auto" checked />
+                      <span data-i18n="autoMode">Auto Mode</span></label
+                    >
+                  </div>
+                </div>
+                <div class="demo-screen" id="demoScreen"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="admin">
+          <div class="container">
+            <div class="section-title reveal">
+              <div>
+                <span class="eyebrow" data-i18n="adminEyebrow">POV Admin</span>
+                <h2 data-i18n="adminTitle">
+                  Panel admin membuat proses manual menjadi lebih rapi
+                </h2>
+              </div>
+              <p data-i18n="adminDesc">
+                Admin dapat review data, mengurangi salah input, dan memantau
+                status proses dari satu panel.
+              </p>
+            </div>
+            <div class="grid2">
+              <div class="card reveal">
+                <h3 data-i18n="before">Sebelum WebBonus</h3>
+                <div class="list">
+                  <div class="li">
+                    <i>✕</i>
+                    <div>
+                      <b data-i18n="ab1t">Claim masuk manual</b>
+                      <p data-i18n="ab1d">
+                        Admin harus mengambil isi form manual sebelum diproses.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="li">
+                    <i>✕</i>
+                    <div>
+                      <b data-i18n="ab2t">Rawan salah input</b>
+                      <p data-i18n="ab2d">
+                        Bonus type, kode agen, nominal, atau detail nota lebih
+                        mudah keliru.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="li">
+                    <i>✕</i>
+                    <div>
+                      <b data-i18n="ab3t">Tracking tidak rapi</b>
+                      <p data-i18n="ab3d">
+                        Sulit melihat claim mana yang sudah diproses dan oleh
+                        admin siapa.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card reveal">
+                <h3 data-i18n="after">Sesudah WebBonus</h3>
+                <div class="list">
+                  <div class="li">
+                    <i>✓</i>
+                    <div>
+                      <b data-i18n="aa1t">Claim Management jelas</b>
+                      <p data-i18n="aa1d">
+                        Admin melihat claim list, filter status, dan detail dari
+                        satu panel.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="li">
+                    <i>✓</i>
+                    <div>
+                      <b data-i18n="aa2t">Action lebih lengkap</b>
+                      <p data-i18n="aa2d">
+                        On process, approve/reject, remarks, comment, dan submit
+                        HQ.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="li">
+                    <i>✓</i>
+                    <div>
+                      <b data-i18n="aa3t">Processed by terlihat</b>
+                      <p data-i18n="aa3d">
+                        ST I8, ST I5, ST I7 dapat terlihat sebagai admin yang
+                        menangani.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="workflow">
+          <div class="container">
+            <div class="section-title reveal">
+              <div>
+                <span class="eyebrow" data-i18n="workflowEyebrow"
+                  >End-to-End Workflow</span
+                >
+                <h2 data-i18n="workflowTitle">
+                  Penjelasan inti project dalam satu alur
+                </h2>
+              </div>
+              <p data-i18n="workflowDesc">
+                User submit lebih mudah, admin proses lebih rapi, dan hasilnya
+                kembali terlihat dengan jelas.
+              </p>
+            </div>
+            <div class="workflow">
+              <div class="node glass reveal">
+                <span class="num">1</span>
+                <h3 data-i18n="w1t">User pilih bonus</h3>
+                <p data-i18n="w1d">
+                  Masuk ke Claim Bonus dan pilih kategori bonus.
+                </p>
+              </div>
+              <div class="node glass reveal">
+                <span class="num">2</span>
+                <h3 data-i18n="w2t">Isi detail & bukti</h3>
+                <p data-i18n="w2d">
+                  Isi field, upload foto bila diperlukan, dan tambahkan remarks.
+                </p>
+              </div>
+              <div class="node glass reveal">
+                <span class="num">3</span>
+                <h3 data-i18n="w3t">Admin review</h3>
+                <p data-i18n="w3d">
+                  Claim dicek, diberi remarks/comment, lalu ditentukan action.
+                </p>
+              </div>
+              <div class="node glass reveal">
+                <span class="num">4</span>
+                <h3 data-i18n="w4t">Submit HQ / status</h3>
+                <p data-i18n="w4d">
+                  Claim masuk tahap HQ dengan status proses yang jelas.
+                </p>
+              </div>
+              <div class="node glass reveal">
+                <span class="num">5</span>
+                <h3 data-i18n="w5t">History kembali terlihat</h3>
+                <p data-i18n="w5d">
+                  User melihat approved, rejected, on process, atau HQ status.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="actions">
+          <div class="container">
+            <div class="section-title reveal">
+              <div>
+                <span class="eyebrow" data-i18n="navActions">Actions</span>
+                <h2 data-i18n="actionsTitle">Actions</h2>
+              </div>
+              <p data-i18n="actionsDesc">
+                Ringkasan fungsi utama dari sisi user, admin, serta
+                control/report untuk monitoring operasional.
+              </p>
+            </div>
+            <div class="grid2">
+              <div class="card reveal">
+                <div class="list">
+                  <div>
+                    <h3>👤 <span data-i18n="userPanel">User Panel</span></h3>
+                    <p>
+                      <b data-i18n="ac1t">Submit claim</b> —
+                      <span data-i18n="ac1d"
+                        >pilih bonus, isi detail, upload bukti, dan kirim
+                        claim.</span
+                      >
+                    </p>
+                    <p>
+                      <b data-i18n="ac2t">Claim History</b> —
+                      <span data-i18n="ac2d"
+                        >lihat history serta hasil action admin dan HQ.</span
+                      >
+                    </p>
+                    <p>
+                      <b data-i18n="ac3t">Comment & remarks</b> —
+                      <span data-i18n="ac3d"
+                        >ikuti komunikasi tindak lanjut dari panel.</span
+                      >
+                    </p>
+                  </div>
+                  <div>
+                    <h3>🛠️ <span data-i18n="adminPanel">Admin Panel</span></h3>
+                    <p>
+                      <b data-i18n="ac4t">Review & filter</b> —
+                      <span data-i18n="ac4d"
+                        >lihat claim masuk, filter status, dan cek detail.</span
+                      >
+                    </p>
+                    <p>
+                      <b data-i18n="ac5t">Process action</b> —
+                      <span data-i18n="ac5d"
+                        >on process, approve/reject, remarks, comment, submit
+                        HQ.</span
+                      >
+                    </p>
+                    <p>
+                      <b data-i18n="ac6t">Processed by</b> —
+                      <span data-i18n="ac6d"
+                        >tracking admin yang menangani tiap nota.</span
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="flow reveal">
+                <div class="card">
+                  <span class="tag" data-i18n="flowTag1">01 • User Submit</span
+                  ><b data-i18n="av1t">Masuk & isi claim</b>
+                  <p data-i18n="av1d">
+                    User mengisi Claim Bonus dan mengirim claim.
+                  </p>
+                </div>
+                <div class="card">
+                  <span class="tag" data-i18n="flowTag2">02 • Claim Masuk</span
+                  ><b data-i18n="av2t">History tercatat</b>
+                  <p data-i18n="av2d">
+                    Claim masuk ke history dengan status awal.
+                  </p>
+                </div>
+                <div class="card">
+                  <span class="tag" data-i18n="flowTag3"
+                    >03 • Admin Process</span
+                  ><b data-i18n="av3t">Review & submit HQ</b>
+                  <p data-i18n="av3d">
+                    Admin memeriksa, memberi catatan, dan menyiapkan tahap HQ.
+                  </p>
+                </div>
+                <div class="card">
+                  <span class="tag" data-i18n="flowTag4"
+                    >04 • Report & Result</span
+                  ><b data-i18n="av4t">Status & dashboard terlihat</b>
+                  <p data-i18n="av4d">
+                    Status kembali ke user dan dashboard merangkum operasional.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="value">
+          <div class="container">
+            <div class="section-title reveal">
+              <div>
+                <span class="eyebrow" data-i18n="navValue">Core Value</span>
+                <h2 data-i18n="coreTitle">Core Value WEBBONUS</h2>
+              </div>
+              <p data-i18n="coreDesc">
+                Nilai operasional WebBonus: proses lebih jelas, kerja manual
+                berkurang, dan kontrol admin lebih kuat.
+              </p>
+            </div>
+            <div class="grid3">
+              <div class="card reveal">
+                <span class="tag" data-i18n="cv1k">Alur Operasional</span>
+                <h3 data-i18n="cv1t">Proses jelas dari awal sampai akhir</h3>
+                <p data-i18n="cv1d">
+                  User tahu harus masuk ke mana, admin tahu apa yang diproses,
+                  dan status akhir kembali terlihat.
+                </p>
+              </div>
+              <div class="card reveal">
+                <span class="tag" data-i18n="cv2k">Efisiensi Kerja</span>
+                <h3 data-i18n="cv2t">Beban manual berkurang</h3>
+                <p data-i18n="cv2d">
+                  Mengurangi cek file berat, input ulang, dan follow-up yang
+                  tercecer.
+                </p>
+              </div>
+              <div class="card reveal">
+                <span class="tag" data-i18n="cv3k">Kontrol Admin</span>
+                <h3 data-i18n="cv3t">Report dan kontrol lebih kuat</h3>
+                <p data-i18n="cv3d">
+                  Remarks, comment, processed by, submit HQ, dan dashboard
+                  summary memperkuat monitoring.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="closing">
+          <div class="container reveal">
+            <div class="final">
+              <div class="closing-grid">
+                <div>
+                  <span class="eyebrow" data-i18n="finalEyebrow"
+                    >Kesimpulan Akhir</span
+                  >
+                  <h2 data-i18n="finalTitle">
+                    WebBonus membuat claim lebih
+                    <span class="gold">mudah</span>, proses lebih
+                    <span style="color: var(--blue)">rapi</span>, dan status
+                    lebih <span style="color: var(--green)">transparan</span>.
+                  </h2>
+                  <div class="closing-line">
+                    <b data-i18n="finalUserLabel">User</b
+                    ><span data-i18n="finalUser"
+                      >Claim, history, status, dan comment berada di satu
+                      tempat.</span
+                    >
+                  </div>
+                  <div class="closing-line">
+                    <b data-i18n="finalAdminLabel">Admin</b
+                    ><span data-i18n="finalAdmin"
+                      >Review, action, submit HQ, dan dashboard berada dalam
+                      satu panel.</span
+                    >
+                  </div>
+                  <div class="closing-line">
+                    <b data-i18n="finalResultLabel">Result</b
+                    ><span data-i18n="finalResult"
+                      >Operasional lebih mudah dijelaskan, lebih cepat
+                      ditracking, dan siap untuk report.</span
+                    >
+                  </div>
+                </div>
+                <div class="list">
+                  <div class="card">
+                    <b data-i18n="close1t">User Experience</b>
+                    <p data-i18n="close1d">
+                      Claim lebih mudah • status lebih jelas • history lebih
+                      rapi
+                    </p>
+                  </div>
+                  <div class="card">
+                    <b data-i18n="close2t">Admin Control</b>
+                    <p data-i18n="close2d">
+                      Review lebih aman • action lebih lengkap • tracking lebih
+                      jelas
+                    </p>
+                  </div>
+                  <div class="card">
+                    <b data-i18n="close3t">Operational Value</b>
+                    <p data-i18n="close3d">
+                      Lebih siap untuk dashboard, summary, dan penjelasan ke tim
+                      lain
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="signoff">
+                <div class="ix big-logo">IX</div>
+                <div class="thanks" data-i18n="thankYou">Thank You</div>
+                <div class="team">IX-ST TEAM</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script>
+      const dict = {
+        zh: {
+          "brandName": "禮金後台",
+          "brandSub": "產品展示",
+          "navIntro": "開場",
+          "navOverview": "總覽",
+          "navUser": "人員視角",
+          "navDemo": "Demo 流程",
+          "navAdmin": "ST 視角",
+          "navWorkflow": "工作流程",
+          "navActions": "Actions",
+          "navValue": "核心價值",
+          "navClosing": "結尾",
+          "heroEyebrow": "內部專案簡報",
+          "heroTitle1": "禮金後台串起",
+          "heroTitle2": "人員、ST 與 HQ 流程",
+          "heroLead": "禮金後台是一個把人員、ST 與 HQ 流程連成同一條工作流的數位面板。",
+          "hp1t": "禮金申請更有方向",
+          "hp1d": "禮金表單、證明、備註與申請紀錄都在同一個面板。",
+          "hp2t": "狀態更清楚",
+          "hp2d": "等待中、處理中、已通過、已拒絕，到 HQ 處理結果都更容易查看。",
+          "hp3t": "ST 更好控管",
+          "hp3d": "審核、備註、留言、processed by 與 Submit HQ 都在 ST 面板。",
+          "hp4t": "方便監控",
+          "hp4d": "Dashboard 協助整理申請、已通過、已拒絕與處理狀態。",
+          "userPreview": "人員面板預覽",
+          "userPreviewSub": "禮金申請啟用中 — 不是 Home",
+          "claimBonus": "禮金申請",
+          "userPortal": "人員入口",
+          "mHome": "Home",
+          "mClaim": "禮金申請",
+          "mHistory": "申請紀錄",
+          "mLanguage": "語言",
+          "mView": "顯示模式",
+          "claimPanel": "禮金申請面板",
+          "fForm": "表單",
+          "fMember": "會員帳號",
+          "fAgent": "代理代碼",
+          "fType": "禮金類型",
+          "fRemarks": "備註",
+          "detailBonus": "禮金細節更清楚",
+          "detailBonusD": "欄位會依照選擇的禮金類別呈現。",
+          "comments": "備註與留言",
+          "commentsD": "人員可直接在面板收到 ST 回覆。",
+          "adminPreview": "ST 面板預覽",
+          "adminPreviewSub": "Dashboard 與 Claim Management 符合 ST 面板",
+          "dashboard": "Dashboard",
+          "adminPanel": "ST 面板",
+          "claimMgmt": "Claim Management",
+          "submitHq": "Submit HQ",
+          "ownerControl": "Owner Control",
+          "reportTitle": "營運報表摘要",
+          "totalClaim": "總申請",
+          "approved": "已通過",
+          "process": "處理中",
+          "rejected": "已拒絕",
+          "adminSample": "活躍 ST",
+          "overviewNav": "總覽",
+          "overviewTitle": "禮金後台優勢",
+          "overviewDesc": "禮金後台不只是把表單搬到面板，而是讓提交、狀態與 ST 控制都更容易理解。",
+          "ovMain": "專案重點",
+          "ov1t": "輸入更有方向",
+          "ov1d": "欄位依照禮金類型呈現，人員不容易填錯。",
+          "ov2t": "紀錄清楚",
+          "ov2d": "人員可在同一頁查看過去申請。",
+          "ov3t": "支援留言與備註",
+          "ov3d": "後續跟進不會散落在系統外。",
+          "ov4t": "ST 控管",
+          "ov4d": "審核、processed by、通過/拒絕與 Submit HQ 更好追蹤。",
+          "ovReportT": "可作為報表基礎",
+          "ovReportD": "ST Dashboard 可查看總申請、處理狀態與已通過金額。",
+          "approvedValue": "通過金額",
+          "userEyebrow": "人員視角",
+          "userTitle": "人員面板更容易使用，狀態更透明",
+          "userDesc": "對人員的主要價值：填寫更簡單、申請紀錄更清楚、狀態更容易追蹤。",
+          "before": "禮金後台前",
+          "ub1t": "手動較麻煩",
+          "ub1d": "人員需要填手動表單，常常不確定哪些必填。",
+          "ub2t": "申請紀錄不清楚",
+          "ub2d": "沒有一個整齊頁面可回看之前的申請。",
+          "ub3t": "狀態不透明",
+          "ub3d": "人員很難確認申請是否正在處理或已完成。",
+          "after": "禮金後台後",
+          "ua1t": "面板更容易使用",
+          "ua1d": "禮金類型、細節、證明與備註都由面板引導。",
+          "ua2t": "申請紀錄清楚",
+          "ua2d": "人員可從同一地方查看申請與 ST / HQ 處理結果。",
+          "ua3t": "有人員 ↔ ST 留言",
+          "ua3d": "修改與後續跟進可直接在面板看到。",
+          "easy": "容易",
+          "ui1t": "查狀態時間減少",
+          "ui1d": "人員不用再開其他檔案確認單據處理進度。",
+          "tidy": "整齊",
+          "ui2t": "每筆申請都有紀錄",
+          "ui2d": "申請資料、備註與處理動作集中在同一流程。",
+          "transparent": "透明",
+          "ui3t": "狀態更容易理解",
+          "ui3d": "等待中、處理中、已通過、已拒絕與 HQ 狀態呈現更清楚。",
+          "demoEyebrow": "即時產品流程",
+          "demoTitle": "Demo flow 1–5 說明禮金後台如何運作",
+          "demoDesc": "流程符合專案邏輯：人員開啟禮金申請、填寫資料、查看紀錄，ST 處理後狀態回到人員。",
+          "ds1t": "開啟禮金申請",
+          "ds1d": "側欄直接定位在禮金申請。",
+          "ds2t": "填寫禮金細節",
+          "ds2d": "會員、代理代碼、禮金類型與備註清楚呈現。",
+          "ds3t": "查看申請紀錄",
+          "ds3d": "申請會顯示狀態與處理結果。",
+          "ds4t": "ST 審核",
+          "ds4d": "ST 審核、備註、設定 processed by 並 Submit HQ。",
+          "ds5t": "狀態回到人員",
+          "ds5d": "處理結果回到申請紀錄。",
+          "productPreview": "產品預覽",
+          "autoMode": "自動模式",
+          "adminEyebrow": "ST 視角",
+          "adminTitle": "ST 面板讓手動流程更整齊",
+          "adminDesc": "ST 可在同一面板審核資料、降低輸入錯誤並追蹤狀態。",
+          "ab1t": "手動收申請",
+          "ab1d": "ST 需要先整理手動表單內容再處理。",
+          "ab2t": "容易輸入錯誤",
+          "ab2d": "禮金類型、代理代碼、金額或單據細節較容易出錯。",
+          "ab3t": "追蹤不整齊",
+          "ab3d": "很難快速知道哪筆已處理、由誰處理。",
+          "aa1t": "Claim Management 清楚",
+          "aa1d": "ST 可在同一面板查看列表、篩選狀態與詳細資料。",
+          "aa2t": "Action 更完整",
+          "aa2d": "處理中、通過/拒絕、備註、留言與 Submit HQ。",
+          "aa3t": "Processed by 可見",
+          "aa3d": "ST I8、ST I5、ST I7 可顯示為處理的 ST。",
+          "workflowEyebrow": "完整工作流程",
+          "workflowTitle": "用一條流程講清楚專案核心",
+          "workflowDesc": "人員提交更容易，ST 處理更整齊，結果也能清楚回到人員。",
+          "w1t": "人員選禮金",
+          "w1d": "進入禮金申請並選擇禮金類別。",
+          "w2t": "填寫資料與證明",
+          "w2d": "填欄位、需要時上傳照片，並加上備註。",
+          "w3t": "ST 審核",
+          "w3d": "檢查申請，加入備註/留言，並決定下一步。",
+          "w4t": "Submit HQ / 狀態",
+          "w4d": "申請進入 HQ 處理，流程狀態更清楚。",
+          "w5t": "紀錄回到人員",
+          "w5d": "人員可看到等待中、已通過、已拒絕、處理中或 HQ 狀態。",
+          "actionsTitle": "Actions",
+          "actionsDesc": "整理人員、ST 與 control/report 的主要功能，方便監控營運。",
+          "userPanel": "人員面板",
+          "ac1t": "提交申請",
+          "ac1d": "選禮金、填資料、上傳證明並送出。",
+          "ac2t": "申請紀錄",
+          "ac2d": "查看歷史申請以及 ST / HQ 處理結果。",
+          "ac3t": "留言與備註",
+          "ac3d": "從面板跟進後續溝通。",
+          "ac4t": "審核與篩選",
+          "ac4d": "查看申請、篩選狀態並檢查細節。",
+          "ac5t": "處理動作",
+          "ac5d": "處理中、通過/拒絕、備註、留言、Submit HQ。",
+          "ac6t": "Processed by",
+          "ac6d": "追蹤每筆單據由哪位 ST 處理。",
+          "flowTag1": "01 • 人員提交",
+          "av1t": "進入並填寫申請",
+          "av1d": "人員填寫禮金申請並送出。",
+          "flowTag2": "02 • 申請進入",
+          "av2t": "紀錄立即建立",
+          "av2d": "申請進入紀錄並顯示初始狀態。",
+          "flowTag3": "03 • ST 處理",
+          "av3t": "審核與 Submit HQ",
+          "av3d": "ST 檢查、備註並準備 HQ 階段。",
+          "flowTag4": "04 • 報表與結果",
+          "av4t": "狀態與 Dashboard 可見",
+          "av4d": "狀態回到人員，Dashboard 整理營運摘要。",
+          "coreTitle": "Core Value 禮金後台",
+          "coreDesc": "禮金後台的營運價值：流程更清楚、手動工作減少、ST 控制更強。",
+          "cv1k": "營運流程",
+          "cv1t": "從開始到結束都清楚",
+          "cv1d": "人員知道去哪裡申請，ST 知道要處理什麼，最後狀態也會回來。",
+          "cv2k": "工作效率",
+          "cv2t": "手動負擔降低",
+          "cv2d": "減少開大型檔案、重複輸入與散落的 follow-up。",
+          "cv3k": "ST 控制",
+          "cv3t": "報表與控制更強",
+          "cv3d": "備註、留言、processed by、Submit HQ 與 Dashboard 加強日常監控。",
+          "finalEyebrow": "最後總結",
+          "finalTitle": "禮金後台讓申請更<span class=\"gold\">容易</span>、流程更<span style=\"color:var(--blue)\">整齊</span>、狀態更<span style=\"color:var(--green)\">透明</span>。",
+          "finalUserLabel": "人員",
+          "finalUser": "申請、紀錄、狀態與留言都在同一地方。",
+          "finalAdminLabel": "ST",
+          "finalAdmin": "審核、action、Submit HQ 與 Dashboard 都在一個面板。",
+          "finalResultLabel": "結果",
+          "finalResult": "營運更容易說明、更快追蹤，也更適合做報表。",
+          "close1t": "人員體驗",
+          "close1d": "申請更容易 • 狀態更清楚 • 紀錄更整齊",
+          "close2t": "ST 控管",
+          "close2d": "審核更安全 • Action 更完整 • Tracking 更清楚",
+          "close3t": "營運價值",
+          "close3d": "更適合 Dashboard、summary 與對其他團隊說明",
+          "thankYou": "Thank You"
+}
+      };
+      const idText = {};
+      document
+        .querySelectorAll("[data-i18n]")
+        .forEach((e) => (idText[e.dataset.i18n] = e.innerHTML));
+      const demoData = {
+        id: [
+          [
+            "Claim Bonus Page",
+            "User masuk langsung ke halaman Claim Bonus.",
+            ["Home", "Claim Bonus", "Claim History", "Language", "View Mode"],
+            [
+              "Welcome Bonus",
+              "Promo Syukuran",
+              "CU Sport",
+              "Lucky Money 88",
+              "Transfer Agen",
+              "Hello Friends",
+            ],
+          ],
+          [
+            "Welcome Bonus Form",
+            "Tampilan submit claim Welcome Bonus dari panel user.",
+            null,
+            [
+              "Bonus Type: 體驗金-完善資料 / Bonus percobaan 28",
+              "Akun Member: SOYA21",
+              "Kode Agen: DW32",
+              "Foto Bukti: Tidak diperlukan",
+              "Remarks: claim 28 dulu TQ",
+              "Comment: User dapat menambahkan catatan saat submit.",
+            ],
+          ],
+          [
+            "Claim History",
+            "User melihat history claim dan perubahan status. ",
+            null,
+            [
+              "#WB-240701 • SOYA21|Approved|HQ Approved",
+              "#WB-240698 • SOYA21|On Process|HQ On Process",
+              "#WB-240694 • SOYA21|Rejected|Need Revision",
+              "User: Data claim Welcome Bonus sudah saya lengkapi.",
+              "Admin: Sudah dicek, claim sedang diproses ke tahap berikutnya.",
+            ],
+          ],
+          [
+            "Admin Verifikasi & Proses",
+            "Admin memeriksa data claim, processed by, remarks, status, dan submit HQ.",
+            ["Dashboard", "Claim Management", "Submit HQ", "Owner Control"],
+            [
+              "Claim #WB-240701|SOYA21 • DW32|On Process",
+              "Processed By|ST I8|Assigned",
+              "Admin Remarks|Validasi data member Welcome Bonus|Saved",
+              "HQ Submission|Ready to submit HQ|Queue",
+            ],
+          ],
+          [
+            "Status Kembali ke User",
+            "Hasil proses admin dan HQ terlihat kembali pada Claim History user.",
+            null,
+            [
+              "Status: Pending • On Process • Approved • Rejected • HQ On Process • HQ Approved",
+              "Update: status tampil kembali dengan penjelasan yang jelas",
+              "Dampak: user tidak perlu membuka file terpisah untuk mengecek hasil claim.",
+            ],
+          ],
+        ],
+        zh: [
+          [
+                    "禮金申請頁",
+                    "人員直接進入禮金申請頁面。",
+                    [
+                              "Home",
+                              "禮金申請",
+                              "申請紀錄",
+                              "語言",
+                              "顯示模式"
+                    ],
+                    [
+                              "Welcome Bonus",
+                              "Promo Syukuran",
+                              "CU Sport",
+                              "Lucky Money 88",
+                              "Transfer Agen",
+                              "Hello Friends"
+                    ]
+          ],
+          [
+                    "Welcome Bonus 表單",
+                    "從人員面板提交 Welcome Bonus 申請。",
+                    null,
+                    [
+                              "禮金類型: 體驗金-完善資料 / Bonus percobaan 28",
+                              "會員帳號: SOYA21",
+                              "代理代碼: DW32",
+                              "證明照片: 不需要",
+                              "備註: claim 28 dulu TQ",
+                              "留言: 人員可在提交時加入補充說明。"
+                    ]
+          ],
+          [
+                    "申請紀錄",
+                    "人員可查看申請紀錄與狀態變化。",
+                    null,
+                    [
+                              "#WB-240701 • SOYA21|已通過|HQ 已通過",
+                              "#WB-240698 • SOYA21|處理中|HQ 處理中",
+                              "#WB-240694 • SOYA21|已拒絕|需要修改",
+                              "人員: Welcome Bonus 申請資料我已補齊。",
+                              "ST: 已審核，申請正在進入下一步處理。"
+                    ]
+          ],
+          [
+                    "ST 審核與處理",
+                    "ST 檢查申請、processed by、備註、狀態並 Submit HQ。",
+                    [
+                              "Dashboard",
+                              "Claim Management",
+                              "Submit HQ",
+                              "Owner Control"
+                    ],
+                    [
+                              "申請 #WB-240701|SOYA21 • DW32|處理中",
+                              "Processed By|ST I8|已指派",
+                              "ST 備註|核對 Welcome Bonus 會員資料|已儲存",
+                              "HQ Submission|準備 Submit HQ|Queue"
+                    ]
+          ],
+          [
+                    "狀態回到人員",
+                    "ST 與 HQ 處理結果會回到人員的申請紀錄。",
+                    null,
+                    [
+                              "狀態: 等待中 • 處理中 • 已通過 • 已拒絕 • HQ 處理中 • HQ 已通過",
+                              "更新: 狀態會用清楚的說明呈現在申請紀錄",
+                              "影響: 人員不必開其他檔案查申請結果。"
+                    ]
+          ]
+        ],
+      };
+      let idx = 0,
+        timer;
+      const screen = document.getElementById("demoScreen"),
+        counter = document.getElementById("counter");
+      function badgeClass(t) {
+        return /Reject|拒絕|Need/.test(t)
+          ? "rejected"
+          : /Process|處理中/.test(t)
+            ? "process"
+            : /Queue|Pending/.test(t)
+              ? "pending"
+              : "approved";
+      }
+      function renderFrames(lang = "id") {
+        screen.innerHTML = demoData[lang]
+          .map(
+            (d, i) =>
+              `<div class="frame ${i === idx ? "active" : ""}"><div class="frame-ui"><div class="frame-head"><div><b>${d[0]}</b><p>${d[1]}</p></div><span class="chip">Step ${i + 1}</span></div>${d[2] ? `<div class="frame-layout"><aside class="side">${d[2].map((m, n) => `<div class="menu ${n === 1 || (i === 3 && n === 1) ? "active" : ""}">${m}</div>`).join("")}</aside><div class="content">` : '<div class="content">'}${
+                i === 2 || i === 3
+                  ? `<div class="history">${d[3]
+                      .slice(0, i === 2 ? 3 : 4)
+                      .map((r) => {
+                        let p = r.split("|");
+                        return `<div class="row"><b>${p[0]}</b><span>${p[1]}</span><span class="badge ${badgeClass(p[2])}">${p[2]}</span></div>`;
+                      })
+                      .join(
+                        "",
+                      )}</div>${i === 2 ? `<span class="tag">${lang === "zh" ? "留言 user ↔ admin" : "Comment User ↔ Admin"}</span><div class="chat">${d[3][3]}</div><div class="chat admin">${d[3][4]}</div>` : ""}`
+                  : d[3]
+                      .map(
+                        (x) =>
+                          `<div class="mini-card"><b>${x.split(":")[0]}</b><p>${x.includes(":") ? x.substring(x.indexOf(":") + 1) : x}</p></div>`,
+                      )
+                      .join("")
+              }</div>${d[2] ? "</div>" : ""}</div></div>`,
+          )
+          .join("");
+      }
+      function setStep(n) {
+        idx = (n + 5) % 5;
+        document
+          .querySelectorAll(".step")
+          .forEach((e, i) => e.classList.toggle("active", i === idx));
+        renderFrames(currentLang || "id");
+        counter.textContent = `${idx + 1} / 5`;
+      }
+      document
+        .querySelectorAll(".step")
+        .forEach((e) => (e.onclick = () => setStep(+e.dataset.step)));
+      const prevBtn = document.getElementById("prev");
+      const nextBtn = document.getElementById("next");
+      const autoInput = document.getElementById("auto");
+      const progressBar = document.getElementById("bar");
+      if (prevBtn) prevBtn.onclick = () => setStep(idx - 1);
+      if (nextBtn) nextBtn.onclick = () => setStep(idx + 1);
+      function runAuto() {
+        clearInterval(timer);
+        if (autoInput && autoInput.checked)
+          timer = setInterval(() => {
+            const r = document.getElementById("demo").getBoundingClientRect();
+            if (r.top < innerHeight * 0.75 && r.bottom > innerHeight * 0.25)
+              setStep(idx + 1);
+          }, 5200);
+      }
+      if (autoInput) autoInput.onchange = runAuto;
+      let currentLang = "id";
+      function updateLangPicker(lang) {
+        currentLang = lang;
+        const label = document.getElementById("langLabel");
+        if (label) label.textContent = lang === "zh" ? "繁體中文" : "Bahasa Indonesia";
+        document.querySelectorAll("[data-lang-option]").forEach((btn) =>
+          btn.classList.toggle("active", btn.dataset.langOption === lang),
+        );
+        updateThemeButton();
+      }
+      function setLang(lang) {
+        document.documentElement.lang = lang === "zh" ? "zh-Hant" : "id";
+        document.querySelectorAll("[data-i18n]").forEach((e) => {
+          const k = e.dataset.i18n;
+          e.innerHTML = lang === "zh" && dict.zh[k] ? dict.zh[k] : idText[k];
+        });
+        localStorage.setItem("webbonus-lang", lang);
+        updateLangPicker(lang);
+        renderFrames(lang);
+      }
+      const langPicker = document.getElementById("langPicker");
+      const langTrigger = document.getElementById("langTrigger");
+      langTrigger.onclick = (event) => {
+        event.stopPropagation();
+        const open = langPicker.classList.toggle("open");
+        langTrigger.setAttribute("aria-expanded", open ? "true" : "false");
+      };
+      document.querySelectorAll("[data-lang-option]").forEach((btn) => {
+        btn.onclick = (event) => {
+          event.stopPropagation();
+          langPicker.classList.remove("open");
+          langTrigger.setAttribute("aria-expanded", "false");
+          setLang(btn.dataset.langOption);
+        };
+      });
+      document.addEventListener("click", () => {
+        langPicker.classList.remove("open");
+        langTrigger.setAttribute("aria-expanded", "false");
+      });
+
+      function updateThemeButton() {
+        const isLight = document.body.classList.contains("theme-light");
+        const icon = document.getElementById("themeIcon");
+        const label = document.getElementById("themeLabel");
+        if (icon) icon.textContent = isLight ? "☀" : "☾";
+        if (label) {
+          label.textContent = currentLang === "zh"
+            ? (isLight ? "淺色" : "深色")
+            : (isLight ? "Light" : "Dark");
+        }
+      }
+      function setTheme(mode) {
+        document.body.classList.toggle("theme-light", mode === "light");
+        localStorage.setItem("webbonus-theme", mode);
+        updateThemeButton();
+      }
+      document.getElementById("themeToggle").onclick = () => {
+        const next = document.body.classList.contains("theme-light") ? "dark" : "light";
+        setTheme(next);
+      };
+      setTheme(localStorage.getItem("webbonus-theme") || "dark");
+      setLang(localStorage.getItem("webbonus-lang") || "id");
+      runAuto();
+      document.querySelectorAll(".reveal").forEach((el) =>
+        new IntersectionObserver(
+          (es, o) =>
+            es.forEach((e) => {
+              if (e.isIntersecting) {
+                el.classList.add("visible");
+                o.disconnect();
+              }
+            }),
+          { threshold: 0.12 },
+        ).observe(el),
+      );
+      const links = [...document.querySelectorAll("#nav a")],
+        secs = links.map((a) => document.querySelector(a.hash));
+      secs.forEach((s) =>
+        new IntersectionObserver(
+          (es) =>
+            es.forEach((e) => {
+              if (e.isIntersecting) {
+                links.forEach((a) =>
+                  a.classList.toggle("active", a.hash === "#" + s.id),
+                );
+              }
+            }),
+          { rootMargin: "-38% 0px -52% 0px" },
+        ).observe(s),
+      );
+      addEventListener(
+        "scroll",
+        () => {
+          const h = document.documentElement.scrollHeight - innerHeight;
+          if (progressBar) progressBar.style.width = (scrollY / (h || 1)) * 100 + "%";
+        },
+        { passive: true },
+      );
+    </script>
+  </body>
+</html>
